@@ -1,4 +1,4 @@
-package com.example.renuka.matrestapp;
+package com.com.gitapp.gihtubapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.fragment;
+package com.gitapp.android.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.renuka.githubapp.R;
+import com.com.gitapp.android.R;
 
 
 public class FollowersFollowingFragment extends Fragment {

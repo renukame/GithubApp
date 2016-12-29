@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.pojo;
+package com.gitapp.android.pojo;
 
 import java.util.List;
 

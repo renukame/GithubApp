@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.network;
+package com.gitapp.android.network;
 
 
 public class Constants {

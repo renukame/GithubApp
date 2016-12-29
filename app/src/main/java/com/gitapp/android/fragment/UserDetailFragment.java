@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.fragment;
+package com.gitapp.android.fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -19,13 +19,13 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.renuka.githubapp.R;
-import com.example.renuka.githubapp.adapter.DetailsAdapter;
-import com.example.renuka.githubapp.network.Constants;
-import com.example.renuka.githubapp.network.NetworkManager;
-import com.example.renuka.githubapp.network.VolleySingleton;
-import com.example.renuka.githubapp.pojo.RepoDetails;
-import com.example.renuka.githubapp.pojo.UserDetails;
+import com.com.gitapp.android.R;
+import com.gitapp.android.adapter.DetailsAdapter;
+import com.gitapp.android.network.Constants;
+import com.gitapp.android.network.NetworkManager;
+import com.gitapp.android.network.VolleySingleton;
+import com.gitapp.android.pojo.RepoDetails;
+import com.gitapp.android.pojo.UserDetails;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.renuka.matrestapp;
+package com.com.gitapp.android;
 
 import org.junit.Test;
 

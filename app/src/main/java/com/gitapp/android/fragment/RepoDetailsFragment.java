@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.fragment;
+package com.gitapp.android.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -13,10 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.renuka.githubapp.R;
-import com.example.renuka.githubapp.adapter.RepoAdapter;
-import com.example.renuka.githubapp.network.NetworkManager;
-import com.example.renuka.githubapp.pojo.RepoDetails;
+import com.com.gitapp.android.R;
+import com.gitapp.android.adapter.RepoAdapter;
+import com.gitapp.android.network.NetworkManager;
+import com.gitapp.android.pojo.RepoDetails;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.fragment;
+package com.gitapp.android.fragment;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.renuka.githubapp.R;
+import com.com.gitapp.android.R;
 
 
 public class LoginDialogFragment extends DialogFragment {

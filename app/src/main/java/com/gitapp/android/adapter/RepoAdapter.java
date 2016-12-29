@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.adapter;
+package com.gitapp.android.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.renuka.githubapp.R;
-import com.example.renuka.githubapp.pojo.RepoDetails;
+import com.com.gitapp.android.R;
+
+import com.gitapp.android.pojo.RepoDetails;
 
 import java.util.ArrayList;
 

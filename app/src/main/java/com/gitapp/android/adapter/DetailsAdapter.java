@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.adapter;
+package com.gitapp.android.adapter;
 
 import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.renuka.githubapp.R;
+import com.com.gitapp.android.R;
 
 import java.util.ArrayList;
 

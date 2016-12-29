@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.activity;
+package com.gitapp.android.activity;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -10,8 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.example.renuka.githubapp.R;
-import com.example.renuka.githubapp.fragment.LoginDialogFragment;
+import com.com.gitapp.android.R;
+
+import com.gitapp.android.fragment.LoginDialogFragment;
 
 public class MainActivity extends AppCompatActivity implements LoginDialogFragment.HandleDialog {
 

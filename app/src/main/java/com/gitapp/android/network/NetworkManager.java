@@ -1,4 +1,4 @@
-package com.example.renuka.githubapp.network;
+package com.gitapp.android.network;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.renuka.githubapp.pojo.FollowersFollowingDetails;
-import com.example.renuka.githubapp.pojo.RepoDetails;
-import com.example.renuka.githubapp.pojo.UserDetails;
+import com.gitapp.android.pojo.FollowersFollowingDetails;
+import com.gitapp.android.pojo.RepoDetails;
+import com.gitapp.android.pojo.UserDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;

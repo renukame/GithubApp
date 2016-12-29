@@ -1,12 +1,13 @@
-package com.example.renuka.githubapp.activity;
+package com.gitapp.android.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.renuka.githubapp.R;
-import com.example.renuka.githubapp.fragment.UserDetailFragment;
+import com.com.gitapp.android.R;
+
+import com.gitapp.android.fragment.UserDetailFragment;
 
 public class UserDetailActivity extends AppCompatActivity {
 
