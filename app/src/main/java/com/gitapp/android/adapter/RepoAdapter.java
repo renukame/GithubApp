@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.com.gitapp.android.R;
+import com.gitapp.android.R;
 
 import com.gitapp.android.pojo.RepoDetails;
 

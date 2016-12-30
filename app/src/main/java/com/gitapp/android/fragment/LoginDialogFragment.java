@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.com.gitapp.android.R;
+import com.gitapp.android.R;
 
 
 public class LoginDialogFragment extends DialogFragment {

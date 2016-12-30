@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.com.gitapp.android.R;
+import com.gitapp.android.R;
 import com.gitapp.android.adapter.DetailsAdapter;
 import com.gitapp.android.network.Constants;
 import com.gitapp.android.network.NetworkManager;

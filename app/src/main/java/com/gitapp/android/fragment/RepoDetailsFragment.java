@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.com.gitapp.android.R;
+import com.gitapp.android.R;
 import com.gitapp.android.adapter.RepoAdapter;
 import com.gitapp.android.network.NetworkManager;
 import com.gitapp.android.pojo.RepoDetails;

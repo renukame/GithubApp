@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.com.gitapp.android.R;
+import com.gitapp.android.R;
 
 import com.gitapp.android.fragment.UserDetailFragment;
 
