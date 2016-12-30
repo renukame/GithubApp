@@ -9,7 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.gitapp.android.pojo.FollowersFollowingDetails;
+import com.gitapp.android.pojo.FollowersDetails;
+import com.gitapp.android.pojo.FollowingDetails;
 import com.gitapp.android.pojo.RepoDetails;
 import com.gitapp.android.pojo.UserDetails;
 
@@ -26,7 +27,7 @@ public class NetworkManager {
     private Context context;
     private UserDetails userDetails;
     private RepoDetails repoDetails;
-    private FollowersFollowingDetails followersFollowingDetails;
+    private FollowersDetails followersFollowingDetails;
 
     public NetworkManager(Context context) {
         instance = VolleySingleton.getInstance();
@@ -83,8 +84,8 @@ public class NetworkManager {
     }
 
     public void setRepoDetails(String serverUrl, final Handler handler) {
-        final ArrayList<RepoDetails> list = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(serverUrl, new Response.Listener<JSONArray>() {
+            ArrayList<RepoDetails> list = new ArrayList<>();
 
             @Override
             public void onResponse(JSONArray response) {
@@ -92,8 +93,8 @@ public class NetworkManager {
                     JSONObject jsonObject = null;
                     try {
                         jsonObject = response.getJSONObject(i);
-                        RepoDetails repoDetails = new RepoDetails(jsonObject.getString("name"),jsonObject.getString("description")
-                        ,jsonObject.getString("created_at"),jsonObject.getString("language"),jsonObject.getString("updated_at"));
+                        RepoDetails repoDetails = new RepoDetails(jsonObject.getString("name"), jsonObject.getString("description")
+                                , jsonObject.getString("created_at"), jsonObject.getString("language"), jsonObject.getString("updated_at"));
                         list.add(repoDetails);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -114,29 +115,31 @@ public class NetworkManager {
 
     }
 
-    public void setFollowingFollwersData(String serverUrl,Handler handler) {
+    public void setFollowingData(String serverUrl, final Handler handler) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(serverUrl, new Response.Listener<JSONArray>() {
-            ArrayList<String> login = new ArrayList<>();
-            ArrayList<String> url = new ArrayList<>();
-            ArrayList<String> location = new ArrayList<>();
-            ArrayList<String> bio = new ArrayList<>();
+            ArrayList<FollowingDetails> list = new ArrayList<>();
+            Handler innerHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    list.add((FollowingDetails) msg.obj);
+                    Message message = new Message();
+                    message.arg1 = Constants.FOLLOWING_DETAIL_SUCCESS;
+                    message.obj = list;
+                    handler.sendMessage(message);
+                }
+            };
+
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
-                    JSONObject jsonObject = null;
                     try {
-                        jsonObject = response.getJSONObject(i);
-                        login.add(jsonObject.getString("name"));
-                        url.add(jsonObject.getString("description"));
-                       // setFollowersFollowingInnerData();
-                        location.add(jsonObject.getString("created_at"));
-                        bio.add(jsonObject.getString("language"));
+                        setInnerFollowingData(response.getJSONObject(i).getString("url"), innerHandler);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
 
-              //  followersFollowingDetails = new FollowersFollowingDetails()
             }
         }, new Response.ErrorListener() {
             @Override
@@ -148,7 +151,123 @@ public class NetworkManager {
 
     }
 
-    public void setFollowersFollowingInnerData(String serverUrl,Handler handler) {
+    public void setInnerFollowingData(String serverUrl, final Handler handler) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(serverUrl, null, new Response.Listener<JSONObject>() {
+            String login;
+            String name;
+            String location;
+            String bio;
+            String avatar;
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    login = response.getString("login");
+                    name = response.getString("name");
+                    location = response.getString("location");
+                    bio = response.getString("bio");
+                    avatar = response.getString("avatar_url");
+                    FollowingDetails followingDetails = new FollowingDetails(login, name, location, bio,avatar);
+                    Message message = new Message();
+                    message.arg1 = Constants.FOLLOWING_DETAIL_SUCCESS;
+                    message.obj = followingDetails;
+                    handler.sendMessage(message);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String errorMessage = errorHelper.getMessage(error, context);
+                Message message = handler.obtainMessage();
+                message.arg1 = Constants.FOLLOWING_DETAIL_FAILURE;
+                Bundle bundle = new Bundle();
+                bundle.putString("errorMessage", errorMessage);
+                message.setData(bundle);
+                handler.sendMessage(message);
+            }
+        });
+        instance.addRequest(jsonObjectRequest);
+    }
+
+    public void setFollowersData(String serverUrl, final Handler handler) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(serverUrl, new Response.Listener<JSONArray>() {
+            ArrayList<FollowersDetails> list = new ArrayList<>();
+            Handler innerHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    list.add((FollowersDetails) msg.obj);
+                    Message message = new Message();
+                    message.arg1 = Constants.FOLLOWERS_DETAIL_SUCCESS;
+                    message.obj = list;
+                    handler.sendMessage(message);
+                }
+            };
+
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        setInnerFollowersData(response.getJSONObject(i).getString("url"), innerHandler);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        instance.addRequest(jsonArrayRequest);
 
     }
+
+    public void setInnerFollowersData(String serverUrl, final Handler handler) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(serverUrl, null, new Response.Listener<JSONObject>() {
+            String login;
+            String name;
+            String location;
+            String bio;
+            String avatar;
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    login = response.getString("login");
+                    name = response.getString("name");
+                    location = response.getString("location");
+                    bio = response.getString("bio");
+                    avatar = response.getString("avatar_url");
+                    FollowersDetails followersDetails = new FollowersDetails(login, name, location, bio,avatar);
+                    Message message = new Message();
+                    message.arg1 = Constants.FOLLOWING_DETAIL_SUCCESS;
+                    message.obj = followersDetails;
+                    handler.sendMessage(message);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String errorMessage = errorHelper.getMessage(error, context);
+                Message message = handler.obtainMessage();
+                message.arg1 = Constants.FOLLOWING_DETAIL_FAILURE;
+                Bundle bundle = new Bundle();
+                bundle.putString("errorMessage", errorMessage);
+                message.setData(bundle);
+                handler.sendMessage(message);
+            }
+        });
+        instance.addRequest(jsonObjectRequest);
+    }
+
+
 }

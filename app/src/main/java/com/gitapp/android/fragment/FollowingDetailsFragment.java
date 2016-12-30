@@ -14,29 +14,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gitapp.android.R;
-import com.gitapp.android.adapter.RepoAdapter;
+import com.gitapp.android.adapter.FollowingAdapter;
 import com.gitapp.android.network.NetworkManager;
-import com.gitapp.android.pojo.RepoDetails;
+import com.gitapp.android.pojo.FollowingDetails;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Renuka on 30-12-2016.
+ */
 
-public class RepoDetailsFragment extends Fragment {
+public class FollowingDetailsFragment extends Fragment {
 
-    private String TAG = RepoDetailsFragment.class.getSimpleName();
+    private String TAG = FollowingDetailsFragment.class.getSimpleName();
+    private String mName;
     private RecyclerView mRecyclerView;
     private NetworkManager mNetworkManager;
-    private String mName;
-    private String url = "https://api.github.com/users/";
-
+    private String url ="https://api.github.com/users/";
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            setData((ArrayList<RepoDetails>) msg.obj);
+            setData((ArrayList<FollowingDetails>) msg.obj);
         }
     };
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -50,7 +51,7 @@ public class RepoDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_repo, container, false);
+        View view = inflater.inflate(R.layout.fragment_follow, container, false);
         mName = getArguments().getString("user_name");
         return view;
     }
@@ -58,25 +59,23 @@ public class RepoDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.repoList);
-
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.followList);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mNetworkManager = new NetworkManager(getActivity());
-        mNetworkManager.setRepoDetails(url+mName+"/repos", mHandler);
+        mNetworkManager.setFollowingData(url+mName+"/following", mHandler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    public void setData(ArrayList<RepoDetails> list) {
-        RepoAdapter repoAdapter = new RepoAdapter(list);
-        mRecyclerView.setAdapter(repoAdapter);
+    public void setData(ArrayList<FollowingDetails> list) {
+        FollowingAdapter followingAdapter = new FollowingAdapter(list);
+        mRecyclerView.setAdapter(followingAdapter);
     }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -107,3 +106,4 @@ public class RepoDetailsFragment extends Fragment {
         super.onDetach();
     }
 }
+

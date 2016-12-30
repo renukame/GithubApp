@@ -1,8 +1,6 @@
 package com.gitapp.android.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +31,6 @@ import java.util.ArrayList;
 public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCardViewClickListener {
 
     private String TAG = UserDetailFragment.class.getSimpleName();
-    private String mName;
     private String mServerUrl = "https://api.github.com/users/";
     private RecyclerView mRecyclerView;
     private NetworkImageView mAavatar;
@@ -50,6 +47,8 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     private DetailsAdapter detailsAdapter;
     private NetworkManager networkManager;
     private ImageLoader mImageLoader;
+    private String mName;
+    private HandleListClick handleListClick;
 
 
     private Handler mHandler = new Handler() {
@@ -85,6 +84,7 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_detail, container, false);
+        mName = getArguments().getString("user_name");
         Log.d(TAG, "onCreateView");
         return view;
     }
@@ -100,9 +100,9 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         networkManager = new NetworkManager(getActivity());
-        //   mName = getIntent().getStringExtra("name");
-        networkManager.setUserDetails(mServerUrl + "petrhosek", mHandler);
+        networkManager.setUserDetails(mServerUrl + mName, mHandler);
         Log.d(TAG, "onActivityCreated");
+        handleListClick = (HandleListClick) getActivity();
     }
 
     public void initializeView(View view) {
@@ -149,9 +149,10 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     @Override
     public void onCardViewClick(View view, int position) {
         Log.d(TAG, "onCardViewClick");
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main, new RepoDetailsFragment())
-                .addToBackStack(null).commit();
+        handleListClick.onHandleListClick(view,position);
+    }
+
+    public interface HandleListClick{
+       void onHandleListClick(View view, int position);
     }
 }

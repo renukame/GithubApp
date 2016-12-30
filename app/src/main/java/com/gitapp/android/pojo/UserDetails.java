@@ -17,18 +17,46 @@ public class UserDetails {
     private String createdAt;
     private String publicRepos;
 
-    public UserDetails() {
-    }
 
     public String getPublicRepos() {
         return publicRepos;
     }
 
     public void setPublicRepos(String publicRepos) {
+
         this.publicRepos = publicRepos;
     }
 
     public UserDetails(String login, String avatarUrl, String followersUrl, String followingUrl, String reposUrl, String name, String company, String location, String email, String noOfFollowers, String noOfFollowing, String createdAt, String updatedAt, String bio, String publicRepos) {
+        if (login.equals("null")) {
+            login = "";
+        } else if (name.equals("null")) {
+            name = "";
+        } else if (bio.equals("null")) {
+            bio = "";
+        } else if (publicRepos.equals("null")) {
+            publicRepos = "";
+        } else if (followersUrl.equals("null")) {
+            followersUrl = "";
+        } else if (followingUrl.equals("null")) {
+            followingUrl = "";
+        } else if (reposUrl.equals("null")) {
+            reposUrl = "";
+        } else if (location.equals("null")) {
+            location = "";
+        } else if (company.equals("null")) {
+            company = "";
+        } else if (email.equals("null")) {
+            email = "";
+        } else if (noOfFollowers.equals("null")) {
+            noOfFollowers = "";
+        } else if (noOfFollowing.equals("null")) {
+            noOfFollowing = "";
+        } else if (updatedAt.equals("null")) {
+            updatedAt = "";
+        } else if (createdAt.equals("null")) {
+            createdAt = "";
+        }
         this.login = login;
         this.avatarUrl = avatarUrl;
         this.followersUrl = followersUrl;

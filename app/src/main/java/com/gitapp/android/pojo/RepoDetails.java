@@ -9,6 +9,17 @@ public class RepoDetails {
     private String updatedAt;
 
     public RepoDetails(String repoName, String description, String createdAt, String language, String updatedAt) {
+        if(repoName.equals("null")){
+            repoName = "";
+        }else if(description.equals("null")){
+            description = "";
+        }else if(updatedAt.equals("null")){
+            updatedAt = "";
+        }else if(language.equals("null")){
+            language = "";
+        }else if(createdAt.equals("null")){
+            createdAt = "";
+        }
         this.repoName = repoName;
         this.description = description;
         this.createdAt = createdAt;
