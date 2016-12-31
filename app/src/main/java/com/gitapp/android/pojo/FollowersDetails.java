@@ -7,14 +7,17 @@ public class FollowersDetails {
     private String bio;
     private String avatar;
 
-    public FollowersDetails(String login, String name, String location, String bio,String avatar) {
+    public FollowersDetails(String login, String name, String location, String bio, String avatar) {
         if (login.equals("null")) {
             login = "";
-        } else if (bio.equals("null")) {
+        }
+        if (bio.equals("null")) {
             bio = "";
-        } else if (location.equals("null")) {
+        }
+        if (location.equals("null")) {
             location = "";
-        } else if (name.equals("null")) {
+        }
+        if (name.equals("null")) {
             name = "";
         }
         this.login = login;

@@ -15,11 +15,11 @@ public class FollowingDetails {
     public FollowingDetails(String login, String name, String location, String bio, String avatar) {
         if (login.equals("null")) {
             login = "";
-        } else if (bio.equals("null")) {
+        } if (bio.equals("null")) {
             bio = "";
-        } else if (location.equals("null")) {
+        } if (location.equals("null")) {
             location = "";
-        } else if (name.equals("null")) {
+        } if (name.equals("null")) {
             name = "";
         }
         this.login = login;

@@ -48,7 +48,7 @@ public class LoginDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 name = userName.getText().toString();
-                handleDialog.onDoneButtonClick(name);
+                handleDialog.onDoneButtonClick(name,view);
                 // getDialog().dismiss();
             }
         });
@@ -56,7 +56,7 @@ public class LoginDialogFragment extends DialogFragment {
 
 
     public interface HandleDialog {
-        void onDoneButtonClick(String name);
+        void onDoneButtonClick(String name,View view);
     }
 
 }

@@ -30,31 +30,44 @@ public class UserDetails {
     public UserDetails(String login, String avatarUrl, String followersUrl, String followingUrl, String reposUrl, String name, String company, String location, String email, String noOfFollowers, String noOfFollowing, String createdAt, String updatedAt, String bio, String publicRepos) {
         if (login.equals("null")) {
             login = "";
-        } else if (name.equals("null")) {
+        }
+        if (name.equals("null")) {
             name = "";
-        } else if (bio.equals("null")) {
+        }
+        if (bio.equals("null")) {
             bio = "";
-        } else if (publicRepos.equals("null")) {
+        }
+        if (publicRepos.equals("null")) {
             publicRepos = "";
-        } else if (followersUrl.equals("null")) {
+        }
+        if (followersUrl.equals("null")) {
             followersUrl = "";
-        } else if (followingUrl.equals("null")) {
+        }
+        if (followingUrl.equals("null")) {
             followingUrl = "";
-        } else if (reposUrl.equals("null")) {
+        }
+        if (reposUrl.equals("null")) {
             reposUrl = "";
-        } else if (location.equals("null")) {
+        }
+        if (location.equals("null")) {
             location = "";
-        } else if (company.equals("null")) {
+        }
+        if (company.equals("null")) {
             company = "";
-        } else if (email.equals("null")) {
+        }
+        if (email.equals("null")) {
             email = "";
-        } else if (noOfFollowers.equals("null")) {
+        }
+        if (noOfFollowers.equals("null")) {
             noOfFollowers = "";
-        } else if (noOfFollowing.equals("null")) {
+        }
+        if (noOfFollowing.equals("null")) {
             noOfFollowing = "";
-        } else if (updatedAt.equals("null")) {
+        }
+        if (updatedAt.equals("null")) {
             updatedAt = "";
-        } else if (createdAt.equals("null")) {
+        }
+        if (createdAt.equals("null")) {
             createdAt = "";
         }
         this.login = login;

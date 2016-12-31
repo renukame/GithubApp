@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -11,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.gitapp.android.R;
-
 import com.gitapp.android.fragment.LoginDialogFragment;
 
 public class MainActivity extends AppCompatActivity implements LoginDialogFragment.HandleDialog {
@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     }
 
     @Override
-    public void onDoneButtonClick(String name) {
+    public void onDoneButtonClick(String name,View view) {
         Intent intent = new Intent(MainActivity.this, UserDetailActivity.class);
         intent.putExtra("name", name);
-        startActivity(intent);
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,view,"transition1");
+        startActivity(intent,activityOptions.toBundle());
     }
 }

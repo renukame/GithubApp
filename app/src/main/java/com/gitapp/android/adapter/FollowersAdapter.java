@@ -14,20 +14,18 @@ import com.gitapp.android.pojo.FollowersDetails;
 
 import java.util.ArrayList;
 
-/**
- * Created by Renuka on 30-12-2016.
- */
-
 public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.ViewHolder> {
 
     private ArrayList<FollowersDetails> followersList;
     private ImageLoader imageLoader;
-    public FollowersAdapter(ArrayList<FollowersDetails> list){
+
+    public FollowersAdapter(ArrayList<FollowersDetails> list) {
         followersList = list;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_follow,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_follow, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         imageLoader = VolleySingleton.getInstance().getmImageLoader();
         return viewHolder;
@@ -48,12 +46,13 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.View
         return followersList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         NetworkImageView avatar;
         TextView name;
         TextView login;
         TextView location;
         TextView bio;
+
         public ViewHolder(View itemView) {
             super(itemView);
             avatar = (NetworkImageView) itemView.findViewById(R.id.avatar);
