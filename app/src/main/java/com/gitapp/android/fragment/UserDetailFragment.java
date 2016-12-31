@@ -1,6 +1,7 @@
 package com.gitapp.android.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.gitapp.android.R;
 import com.gitapp.android.adapter.DetailsAdapter;
+import com.gitapp.android.helper.Helper;
 import com.gitapp.android.network.Constants;
 import com.gitapp.android.network.NetworkManager;
 import com.gitapp.android.network.VolleySingleton;
@@ -49,7 +51,7 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     private ImageLoader mImageLoader;
     private String mName;
     private HandleListClick handleListClick;
-
+    private ProgressDialog mProgressDialog;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -60,6 +62,7 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
                     break;
                 case Constants.USER_DETAIL_SUCCESS:
                     userDetails = (UserDetails) msg.obj;
+                    Helper.cancelDialog(mProgressDialog);
                     setData();
                     break;
                 default:
@@ -99,6 +102,8 @@ public class UserDetailFragment extends Fragment implements DetailsAdapter.OnCar
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mProgressDialog = new ProgressDialog(getActivity());
+        Helper.showLoadingDialog(mProgressDialog,"Loading...");
         networkManager = new NetworkManager(getActivity());
         networkManager.setUserDetails(mServerUrl + mName, mHandler);
         Log.d(TAG, "onActivityCreated");

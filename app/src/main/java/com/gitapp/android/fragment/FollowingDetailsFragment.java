@@ -1,6 +1,7 @@
 package com.gitapp.android.fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.gitapp.android.R;
 import com.gitapp.android.adapter.FollowingAdapter;
+import com.gitapp.android.helper.Helper;
+import com.gitapp.android.network.Constants;
 import com.gitapp.android.network.NetworkManager;
 import com.gitapp.android.pojo.FollowingDetails;
 
@@ -31,11 +34,22 @@ public class FollowingDetailsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private NetworkManager mNetworkManager;
     private String url ="https://api.github.com/users/";
+    private ProgressDialog mProgressDialog;
+
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            setData((ArrayList<FollowingDetails>) msg.obj);
+            switch (msg.arg1) {
+                case Constants.FOLLOWING_DETAIL_FAILURE:
+                    break;
+                case Constants.FOLLOWING_DETAIL_SUCCESS:
+                    Helper.cancelDialog(mProgressDialog);
+                    setData((ArrayList<FollowingDetails>) msg.obj);
+                    break;
+                default:
+                    break;
+            }
         }
     };
     @Override
@@ -65,6 +79,8 @@ public class FollowingDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mProgressDialog = new ProgressDialog(getActivity());
+        Helper.showLoadingDialog(mProgressDialog,"Loading...");
         mNetworkManager = new NetworkManager(getActivity());
         mNetworkManager.setFollowingData(url+mName+"/following", mHandler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
